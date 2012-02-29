@@ -1,4 +1,4 @@
-Tarsnapit 
+== Tarsnapit ==
 
 Super simple php scirpt which allows you to make periodic backups of specified dirs as well as mysql databases (you should be able to modify it pretty easily to support other databases). 
 
@@ -10,13 +10,13 @@ The script should be perfect for daily backups of small to medium applications.
 
 The main focus of tarsnapit script is daily backups.
 
-Security
+=== Security ===
 
 Make sure to set correct permissions on the tarsnapit script, especially if you are going to backup your databaseses, so you not reveal your DB passwords.
 
-Basic usage
+=== Basic usage ===
 
-1) Config sample
+===== 1) Config sample =====
 
 Note: Make sure to adjust your php location at the top of the script ( #!/usr/bin/php ) or provide path to php in the crontab.
 
@@ -65,13 +65,13 @@ $excludesArr = array(
 );
 
 
-2) Set up crontab
+===== 2) Set up crontab =====
 
 31 22 * * * /path/to/tarsnapit/tarsnapit.php >> /var/log/crons/crons.txt 
 
 you could add 2>&1 to write tarsnap stat to the log file instead of email notifications. 
 
-3) Test if tarsnapit actually produced anythign
+===== 3) Test if tarsnapit actually produced anything =====
 
 tarsnap --list-archives 
 
