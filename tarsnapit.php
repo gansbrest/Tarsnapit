@@ -116,9 +116,7 @@ function deleteOldArchives($dateStr, $secureDateStr = KEEP_AT_LEAST) {
   }
 
   if (!empty($archToRemoveList)) {
-    foreach ($archToRemoveList as $archiveName) {
-      system(TARSNAP_BIN . ' -d -f ' . $archiveName);
-    }
+    system(TARSNAP_BIN . ' -d -f ' . implode(' -f ', $archToRemoveList));
   }
 }
 
