@@ -81,7 +81,6 @@ if (empty($dbStatus) && empty($excludeStatus) && !empty($filesAndFoldersArr)) {
 }
 
 # Cleanup
-$tarsnapError = 0;
 if (empty($tarsnapError)) {
   system('rm -rf ' . DB_BACKUP_DIR . '*');
   deleteOldArchives(DELETE_OLD_ARCH_AFTER);
@@ -117,7 +116,9 @@ function deleteOldArchives($dateStr, $secureDateStr = KEEP_AT_LEAST) {
   }
 
   if (!empty($archToRemoveList)) {
-    system(TARSNAP_BIN . ' -d -f ' . implode(' ', $archToRemoveList));   
+    foreach ($archToRemoveList as $archiveName) {
+      system(TARSNAP_BIN . ' -d -f ' . $archiveName);
+    }
   }
 }
 
