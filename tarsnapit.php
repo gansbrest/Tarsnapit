@@ -61,7 +61,7 @@ $excludeStatus = $status ? 0 : 1;
 
 # Call tarsnap to create archive
 $archiveName = date('Y-m-d') . '-prod';
-$tarsnapError = 1; // Tarsnap should reset this flag later
+$tarsnapError = 0; // Tarsnap should reset this flag later
 
 // Check for errors in previous steps
 if (empty($dbStatus) && empty($excludeStatus) && !empty($filesAndFoldersArr)) {
