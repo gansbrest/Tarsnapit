@@ -95,16 +95,15 @@ Plugins are just classes and at the moment they don't implement interface ( todo
 * optional methods
   * extendConfig - this is kind of interesting. The idea here is that your plugin could provide additional groups (directories or files) to archive. Lets go back to our mysqldump example for a second. Say we want to store generated sql file in the /tmp/mysql/dump directory and would like to backup that, but we don't want to hardcode it to the config, because config doesnt need to know about plugins internals ( of course hardcoding plugin path to main config would work, but we trying to avoid duplication and maintain abstraction ). To do that we just extend main configuration by defining **extendConfig** method:
 
-```
-private $binlogs_location = '/tmp/mysqldump';
+    ```
+    private $binlogs_location = '/tmp/mysqldump';
 
-public function extendConfig() {
-  return array(
-    'mysql_binlogs' => array($this->binlogs_location)
-  );  
-}
-```
-
+    public function extendConfig() {
+      return array(
+        'mysql_binlogs' => array($this->binlogs_location)
+      );  
+    }
+    ```
     After that `/tmp/mysqldump` will be included during main backup phase. Neat!
   * cleanup - this method should do plugin cleanup and will be executed by tarsnapit after backup phase. Remove your tmp directories or other stuff here.
 
