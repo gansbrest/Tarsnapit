@@ -53,11 +53,13 @@ if (isset($options['d'])) {
   if (!empty($config)) {
 
     // Create exclusions to be passed to tarsnap
+    $excludes_str = '';
     if (!empty($config['excludes'])) {
       $exclusions_file = '/tmp/tarsnap-' . $options['b'] . '-excludes';
       $bytes_wrtn = file_put_contents($exclusions_file, implode("\n", $config['excludes']));
       if ($bytes_wrtn > 0) {
         $status = 0;
+        $excludes_str = ' -X ' . $exclusions_file;
       }
       check_status($status, 'Problem with exclusions file');
     }
@@ -81,7 +83,7 @@ if (isset($options['d'])) {
     $archiveName = date('Y-m-d-H-i-s') . '-prod-' . $options['b'];
 
     foreach($config['groups'] as $archiveSuffix => $fNamesList) { 
-      $cmd = $tarsnap_bin . ' -c -f ' . $archiveName . '-' . $archiveSuffix . ' -X ' . $exclusions_file . ' ' . implode(' ', $fNamesList);
+      $cmd = $tarsnap_bin . ' -c -f ' . $archiveName . '-' . $archiveSuffix . $excludes_str . ' ' . implode(' ', $fNamesList);
       print $cmd . "\n";
       system($cmd, $status);
 
