@@ -2,6 +2,10 @@
 
 Recently I needed to add hourly option for my tarsnap backups, so I rewrote whole script to make it more general and abstract. Enjoy!
 
+## Installation 
+
+Just copy main tarsnapit.php script somewhere on your server, so you can run it from cron.
+
 ## Features
 
 * In the current implementation tarsnapit works in **two** modes:
