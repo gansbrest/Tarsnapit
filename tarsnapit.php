@@ -131,7 +131,7 @@ function deleteOldArchives($archivesList, $filterName, $delete_after, $keep_at_l
   $secureDate = clone $currDate;
   $secureDate->modify('-' . $keep_at_least);
 
-  if ($oldestArchiveDate < $secureDate) {
+  if ($oldestArchiveDate >= $secureDate) {
     return; // Keep at least $secureDateStr of backups :)
   }
 
@@ -151,7 +151,7 @@ function deleteOldArchives($archivesList, $filterName, $delete_after, $keep_at_l
   }
 
   if (!empty($archToRemoveList)) {
-    system(TARSNAP_BIN . ' -d -f ' . implode(' -f ', $archToRemoveList));
+    system($config['global']['tarsnap_bin'] . ' -d -f ' . implode(' -f ', $archToRemoveList));
   }
 }
 
